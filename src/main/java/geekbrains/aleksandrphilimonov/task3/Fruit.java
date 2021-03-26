@@ -1,6 +1,6 @@
 package geekbrains.aleksandrphilimonov.task3;
 
 public abstract class Fruit {
-    private float weight;
+//    private float weight;
     abstract float getWeight();
 }

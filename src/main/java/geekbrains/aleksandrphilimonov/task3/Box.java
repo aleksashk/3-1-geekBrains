@@ -12,29 +12,8 @@ public class Box<T extends Fruit> {
         weight = 0.0f;
     }
 
-    public Box(ArrayList<T> arrayList, float weight) {
-        this.arrayList = arrayList;
-        this.weight = weight;
-    }
-
     public float getWeight() {
-        float res = 0.0f;
-        for (T item : arrayList) {
-            res += item.getWeight();
-        }
-        return res;
-    }
-
-    public void setWeight(float weight) {
-        this.weight = weight;
-    }
-
-    public ArrayList<T> getArrayList() {
-        return arrayList;
-    }
-
-    public void setArrayList(ArrayList<T> arrayList) {
-        this.arrayList = arrayList;
+        return arrayList.size() == 0 ? 0f : arrayList.get(0).getWeight() + arrayList.size();
     }
 
     public void add(T item) {
@@ -42,15 +21,15 @@ public class Box<T extends Fruit> {
         this.weight += item.getWeight();
     }
 
-    public boolean compare(Box<? extends Fruit> anotherBox) {
+    public boolean compare(Box<?> anotherBox) {
         return Math.abs(getWeight() - anotherBox.getWeight()) < 0.00001;
     }
 
-    public void removeItems(Box<T> dest, Box<T> src) {
-        dest.weight = src.weight;
-        src.weight = 0.0f;
-        dest.arrayList = src.arrayList;
-        src.arrayList = new ArrayList<>();
+    public void removeItems(Box<T> dest) {
+        dest.weight += weight;
+        weight = 0.0f;
+        dest.arrayList.addAll(arrayList);
+        arrayList = new ArrayList<>();
     }
 
 }
